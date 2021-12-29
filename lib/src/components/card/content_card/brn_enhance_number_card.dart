@@ -152,12 +152,15 @@ class BrnEnhanceNumberCard extends StatelessWidget {
                       )),
                       //分割线的显示规则是：固定高度47
                       //                item之间显示，最后一个不显示
-                      Visibility(
-                        visible: !allCondition,
-                        child: Container(
-                          height: 47,
-                          width: defaultConfig.dividerWidth,
-                          color: defaultConfig.commonConfig.dividerColorBase,
+                      Container(
+                        height: 47,
+                        child: Visibility(
+                          visible: !allCondition,
+                          child: Container(
+                            height: double.infinity,
+                            width: defaultConfig.dividerWidth,
+                            color: defaultConfig.commonConfig.dividerColorBase,
+                          ),
                         ),
                       ),
                     ],
@@ -182,14 +185,17 @@ class BrnEnhanceNumberCard extends StatelessWidget {
       {double width}) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         _buildTopWidget(model, config, width: width),
         SizedBox(
           height: itemRunningSpace,
         ),
-        _buildBottomWidget(model, config, width: width)
+        Visibility(
+          visible: model.title != null,
+          child: _buildBottomWidget(model, config, width: width),
+        )
       ],
     );
   }

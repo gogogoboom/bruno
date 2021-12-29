@@ -522,6 +522,7 @@ class BrnPopupListWindow {
       {List<String> data,
       BrnPopupDirection popDirection = BrnPopupDirection.bottom,
       double offset = 0,
+        Color backgroundColor = Colors.white,
       BrnPopupListItemClick onItemClick,
       VoidCallback onDismiss}) {
     double arrowHeight = 6.0;
@@ -533,7 +534,6 @@ class BrnPopupListWindow {
     double arrowOffset;
     Color borderColor =
         BrnThemeConfigurator.instance.getConfig().commonConfig.dividerColorBase;
-    Color backgroundColor = Colors.white;
     TextStyle textStyle = TextStyle(
         color: BrnThemeConfigurator.instance
             .getConfig()
