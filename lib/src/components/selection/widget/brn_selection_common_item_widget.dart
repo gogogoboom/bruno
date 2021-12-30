@@ -98,8 +98,9 @@ class BrnSelectionCommonItemWidget extends StatelessWidget {
                           fontWeight: FontWeight.normal,
                           decoration: TextDecoration.none,
                           color: themeData.commonConfig.colorTextSecondary),
-                      maxLines: 1,
-                      textOverflow: TextOverflow.ellipsis),
+                      // maxLines: 1,
+                      // textOverflow: TextOverflow.ellipsis,
+                  ),
                 ),
               )
             ],

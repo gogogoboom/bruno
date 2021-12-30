@@ -179,10 +179,10 @@ class BrnSelectionViewState extends State<BrnSelectionView> {
             return true;
           }
 
-          if (widget.onSelectionPreShow != null) {
-            _selectionData[menuIndex].filterShowType =
-                widget.onSelectionPreShow(menuIndex, _selectionData[menuIndex]);
-          }
+          // if (widget.onSelectionPreShow != null) {
+          //   _selectionData[menuIndex].filterShowType =
+          //       widget.onSelectionPreShow(menuIndex, _selectionData[menuIndex]);
+          // }
 
           /// 自定义 Menu 的时候，
           /// 1、外部设置选中的 key-value 参数。

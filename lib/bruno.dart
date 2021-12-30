@@ -46,6 +46,8 @@ export 'src/components/selection/widget/brn_layer_more_selection_page.dart';
 export 'src/components/selection/bean/brn_filter_entity.dart';
 export 'src/components/selection/brn_simple_selection.dart';
 export 'src/components/selection/widget/brn_selection_animate_widget.dart';
+export 'src/components/selection/widget/brn_selection_list_widget.dart';
+export 'src/components/selection/widget/brn_selection_full_page_widget.dart';
 
 //选择器
 export 'src/components/picker/multi_range_picker/bean/brn_multi_column_picker_entity.dart';
