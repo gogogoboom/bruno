@@ -68,6 +68,8 @@ class BrnInputText extends StatelessWidget {
 
   /// 边框颜色
   final Color borderColor;
+  
+  final Color cursorColor;
 
   BrnInputText({
     this.onTextChange,
@@ -87,6 +89,7 @@ class BrnInputText extends StatelessWidget {
     this.textInputAction = TextInputAction.done,
     this.borderRadius,
     this.borderColor,
+    this.cursorColor,
   });
 
   @override
@@ -128,6 +131,7 @@ class BrnInputText extends StatelessWidget {
         controller: _controller,
         keyboardType: TextInputType.multiline,
         maxLength: maxLength,
+        cursorColor: cursorColor,
         maxLengthEnforced: true,
         maxLines: null,
         autofocus: autoFocus ?? true,
