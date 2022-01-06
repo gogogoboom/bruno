@@ -70,6 +70,10 @@ class BrnFormItemConfig extends BrnBaseConfig {
   /// 提示文本样式
   /// BrnTextStyle(color: [BrnCommonConfig.colorTextSecondary], fontSize: [BrnCommonConfig.fontSizeBase])
   BrnTextStyle tipsTextStyle;
+  
+  
+  ///光标颜色
+  Color cursorColor;
 
   BrnFormItemConfig.generatorFromConfigId(String configId) {
     initThemeConfig(configId);
@@ -92,6 +96,7 @@ class BrnFormItemConfig extends BrnBaseConfig {
       this.headTitleTextStyle,
       this.optionTextStyle,
       this.optionSelectedTextStyle,
+      this.cursorColor,
       String configId = BrnThemeConfigurator.GLOBAL_CONFIG_ID})
       : super(configId: configId);
 
