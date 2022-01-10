@@ -50,6 +50,7 @@ class BrnBigMainButton extends StatelessWidget {
   final Color bgColor;
 
   final BrnButtonConfig themeData;
+  final BorderRadiusGeometry borderRadius;
 
   const BrnBigMainButton({
     Key key,
@@ -59,6 +60,7 @@ class BrnBigMainButton extends StatelessWidget {
     this.onTap,
     this.themeData,
     this.bgColor,
+    this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -75,6 +77,7 @@ class BrnBigMainButton extends StatelessWidget {
           width: width ?? double.infinity,
           height: defaultThemeConfig.bigButtonHeight),
       alignment: Alignment.center,
+      borderRadius: borderRadius,
       isEnable: isEnable ?? true,
       text: title ?? '确认',
       backgroundColor: bgColor ?? defaultThemeConfig.commonConfig.brandPrimary,

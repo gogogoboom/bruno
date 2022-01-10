@@ -39,6 +39,7 @@ class BrnBigGhostButton extends StatelessWidget {
   ///默认父布局可用空间
   final double width;
   final BrnButtonConfig themeData;
+  final BorderRadiusGeometry borderRadius;
 
   const BrnBigGhostButton({
     Key key,
@@ -48,6 +49,7 @@ class BrnBigGhostButton extends StatelessWidget {
     this.onTap,
     this.width,
     this.themeData,
+    this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -59,7 +61,7 @@ class BrnBigGhostButton extends StatelessWidget {
         .merge(defaultThemeConfig);
 
     return BrnNormalButton(
-      borderRadius: BorderRadius.circular(defaultThemeConfig.bigButtonRadius),
+      borderRadius: borderRadius ?? BorderRadius.circular(defaultThemeConfig.bigButtonRadius),
       constraints: BoxConstraints.tightFor(
           width: width ?? double.infinity,
           height: defaultThemeConfig.bigButtonHeight),
