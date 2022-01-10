@@ -578,6 +578,59 @@ class BrnPopupListWindow {
         )));
   }
 
+  static void showPopCustomWindow(context, GlobalKey popKey,
+      {Widget child,
+        BrnPopupDirection popDirection = BrnPopupDirection.bottom,
+        double offset = 0,
+        VoidCallback onDismiss}) {
+    double arrowHeight = 6.0;
+    double borderRadius = 4;
+    double spaceMargin = 0;
+    double minWidth = 100;
+    double maxWidth = 250;
+    double maxHeight = 200;
+    double arrowOffset;
+    Color borderColor =
+        BrnThemeConfigurator.instance.getConfig().commonConfig.dividerColorBase;
+    Color backgroundColor = Colors.white;
+    TextStyle textStyle = TextStyle(
+        color: BrnThemeConfigurator.instance
+            .getConfig()
+            .commonConfig
+            .colorTextBase,
+        fontSize: 14);
+    bool hasCloseIcon = true;
+
+    Navigator.push(
+        context,
+        BrnPopupRoute(
+            child: BrnPopupWindow(
+              context,
+              arrowHeight: arrowHeight,
+              popKey: popKey,
+              textStyle: textStyle,
+              backgroundColor: backgroundColor,
+              arrowOffset: arrowOffset,
+              isShowCloseIcon: hasCloseIcon,
+              offset: offset,
+              widget: Container(
+                constraints:
+                BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.only(top: 6, bottom: 6, left: 12, right: 12),
+                    child: child,
+                  ),
+                ),
+              ),
+              popDirection: popDirection,
+              borderRadius: borderRadius,
+              borderColor: borderColor,
+              spaceMargin: spaceMargin,
+              onDismiss: onDismiss,
+            )));
+  }
+
   static List<Widget> _getItems(
       BuildContext context,
       double minWidth,
