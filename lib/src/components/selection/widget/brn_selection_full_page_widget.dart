@@ -18,6 +18,7 @@ class BrnListSelectionFullPageWidget extends StatefulWidget {
   final double maxContentHeight;
   final bool showSelectedCount;
   final BrnOnRangeSelectionConfirm onSelectionConfirm;
+  final Widget extra;
   BrnSelectionConfig themeData;
 
   BrnListSelectionFullPageWidget(
@@ -26,6 +27,7 @@ class BrnListSelectionFullPageWidget extends StatefulWidget {
       this.maxContentHeight = DESIGN_SELECTION_HEIGHT,
       this.showSelectedCount = false,
       this.onSelectionConfirm,
+      this.extra,
       this.themeData})
       : super(key: key);
 
@@ -81,6 +83,7 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
               Expanded(
                 child: _listWidget(),
               ),
+              if(widget.extra != null) widget.extra,
               SafeArea(
                 child: _bottomWidget(),
               )
