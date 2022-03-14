@@ -19,6 +19,8 @@ class BrnListSelectionFullPageWidget extends StatefulWidget {
   final bool showSelectedCount;
   final BrnOnRangeSelectionConfirm onSelectionConfirm;
   final Widget extra;
+  final Function(int, int, int) onSelectionChange;
+  final Function() onReset;
   BrnSelectionConfig themeData;
 
   BrnListSelectionFullPageWidget(
@@ -28,7 +30,7 @@ class BrnListSelectionFullPageWidget extends StatefulWidget {
       this.showSelectedCount = false,
       this.onSelectionConfirm,
       this.extra,
-      this.themeData})
+      this.themeData, this.onSelectionChange, this.onReset})
       : super(key: key);
 
   @override
@@ -130,6 +132,7 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
                 widget.entity.filterType == BrnSelectionFilterType.Radio) {
               _confirmButtonClickEvent();
             }
+            widget.onSelectionChange(_firstIndex, _secondIndex, _thirdIndex);
           }));
     } else if (!BrunoTools.isEmpty(_firstList) &&
         !BrunoTools.isEmpty(_secondList) &&
@@ -145,6 +148,7 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
           singleListItemSelect:
               (int listIndex, int index, BrnSelectionEntity entity) {
             _setFirstIndex(index);
+            widget.onSelectionChange(_firstIndex, _secondIndex, _thirdIndex);
           }));
 
       widgets.add(BrnSelectionSingleListWidget(
@@ -157,6 +161,7 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
           singleListItemSelect:
               (int listIndex, int index, BrnSelectionEntity entity) {
             _setSecondIndex(index);
+            widget.onSelectionChange(_firstIndex, _secondIndex, _thirdIndex);
           }));
     } else if (!BrunoTools.isEmpty(_firstList) &&
         !BrunoTools.isEmpty(_secondList) &&
@@ -172,6 +177,7 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
           singleListItemSelect:
               (int listIndex, int index, BrnSelectionEntity entity) {
             _setFirstIndex(index);
+            widget.onSelectionChange(_firstIndex, _secondIndex, _thirdIndex);
           }));
 
       widgets.add(BrnSelectionSingleListWidget(
@@ -184,6 +190,7 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
           singleListItemSelect:
               (int listIndex, int index, BrnSelectionEntity entity) {
             _setSecondIndex(index);
+            widget.onSelectionChange(_firstIndex, _secondIndex, _thirdIndex);
           }));
       widgets.add(BrnSelectionSingleListWidget(
           items: _thirdList,
@@ -306,6 +313,7 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
 
   void _clearAllSelectedItems() {
     _resetSelectionDatas(widget.entity);
+    widget.onReset.call();
     setState(() {
       _configDefaultInitSelectIndex();
       _refreshDataSource();
