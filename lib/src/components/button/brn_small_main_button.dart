@@ -127,7 +127,7 @@ class BrnSmallMainButton extends StatelessWidget {
           onTap: onTap,
           textStyle: style,
           insertPadding: EdgeInsets.symmetric(
-              vertical: _BVerticalPadding, horizontal: _BHorizontalPadding),
+              vertical: 2, horizontal: _BHorizontalPadding),
         );
       },
     );

@@ -92,14 +92,11 @@ class BrnTitleState extends State<BrnBaseTitle> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: 25,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Expanded(
+                child: Container(
                   padding: BrnFormUtil.titleEdgeInsetsForHead(
                       widget.isRequire, widget.themeData),
                   child: Row(
@@ -108,7 +105,9 @@ class BrnTitleState extends State<BrnBaseTitle> {
                       BrnFormUtil.buildRequireWidget(widget.isRequire),
 
                       // 主标题
-                      getTitleWidget(),
+                      Expanded(
+                        child: getTitleWidget(),
+                      ),
 
                       // 问号提示
                       BrnFormUtil.buildTipLabelWidget(
@@ -116,16 +115,15 @@ class BrnTitleState extends State<BrnBaseTitle> {
                     ],
                   ),
                 ),
+              ),
 
-                // 自定义操作区
-                Offstage(
-                  offstage: (widget.customActionWidget == null),
-                  child: widget.customActionWidget ?? Container(),
-                ),
-              ],
-            ),
+              // 自定义操作区
+              Offstage(
+                offstage: (widget.customActionWidget == null),
+                child: widget.customActionWidget ?? Container(),
+              ),
+            ],
           ),
-
           // 副标题
           Offstage(
             offstage: (widget.subTitle == null || widget.subTitle.isEmpty),

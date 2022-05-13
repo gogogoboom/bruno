@@ -1,5 +1,6 @@
 // @dart=2.9
 
+import 'package:bruno/src/components/line/brn_line.dart';
 import 'package:bruno/src/components/selection/bean/brn_selection_common_entity.dart';
 import 'package:bruno/src/components/selection/brn_selection_util.dart';
 import 'package:bruno/src/components/selection/widget/brn_selection_common_item_widget.dart';
@@ -20,6 +21,7 @@ class BrnSelectionSingleListWidget extends StatefulWidget {
   int currentListIndex;
   double maxHeight;
   BrnSelectionConfig themeData;
+  bool withLine;
 
   BrnSelectionSingleListWidget({
     @required this.items,
@@ -30,6 +32,7 @@ class BrnSelectionSingleListWidget extends StatefulWidget {
     this.focusedIndex,
     this.singleListItemSelect,
     this.themeData,
+    this.withLine = false,
   }) {
     if (items == null) {
       items = List();
@@ -79,7 +82,7 @@ class _BrnSelectionSingleListWidgetState
           padding: EdgeInsets.only(top: 0),
           scrollDirection: Axis.vertical,
           itemCount: widget.items.length,
-          separatorBuilder: (BuildContext context, int index) => Container(),
+          separatorBuilder: (BuildContext context, int index) => BrnLine(height: widget.withLine ? 1 : 0),
           itemBuilder: (BuildContext context, int index) {
             BrnSelectionEntity item = widget.items[index];
 

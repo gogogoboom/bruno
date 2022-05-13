@@ -53,6 +53,8 @@ enum BrnSelectionWindowType {
 }
 
 class BrnSelectionEntity {
+  String id;
+
   /// 类型 是单选、复选还是有自定义输入
   String type;
 
@@ -118,6 +120,7 @@ class BrnSelectionEntity {
 
   BrnSelectionEntity(
       {this.key,
+      this.id,
       this.value,
       this.defaultValue,
       this.title,
@@ -158,6 +161,7 @@ class BrnSelectionEntity {
 
   BrnSelectionEntity.fromJson(Map<String, dynamic> map) {
     if (map == null) return;
+    id = map['id'] ?? '';
     title = map['title'] ?? "";
     subTitle = map['subTitle'] ?? "";
     key = map['key'] ?? "";
@@ -182,6 +186,7 @@ class BrnSelectionEntity {
   static BrnSelectionEntity fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     BrnSelectionEntity entity = BrnSelectionEntity();
+    entity.id = map['id'];
     entity.title = map['title'] ?? "";
     entity.subTitle = map['subTitle'] ?? "";
     entity.key = map['key'] ?? "";

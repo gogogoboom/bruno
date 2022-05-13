@@ -84,6 +84,8 @@ class BrnTextBlockInputFormItem extends StatefulWidget {
   /// 最大行数，默认值20
   final int maxLines;
 
+  final FocusNode focusNode;
+
   /// form配置
   BrnFormItemConfig themeData;
 
@@ -110,7 +112,7 @@ class BrnTextBlockInputFormItem extends StatefulWidget {
       this.controller,
       this.minLines = 4,
       this.maxLines = 20,
-      this.themeData})
+      this.themeData, this.focusNode})
       : super(key: key) {
     this.themeData ??= BrnFormItemConfig();
     this.themeData = BrnThemeConfigurator.instance
@@ -181,6 +183,7 @@ class BrnTextBlockInputFormItemState extends State<BrnTextBlockInputFormItem> {
           Container(
             padding: BrnFormUtil.errorEdgeInsets(widget.themeData),
             child: TextField(
+              focusNode: widget.focusNode,
               keyboardType: BrnFormUtil.getInputType(widget.inputType),
               controller: _controller,
               maxLength: widget.maxCharCount,

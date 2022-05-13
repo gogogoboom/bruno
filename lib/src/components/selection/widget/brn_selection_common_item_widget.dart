@@ -62,50 +62,67 @@ class BrnSelectionCommonItemWidget extends StatelessWidget {
           itemSelectFunction(item);
         }
       },
-      child: Container(
-        padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-        color: getItemBGColor(),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Row(
+      child: Stack(
+        alignment: Alignment.topRight,
+        children: [
+          Container(
+            padding: EdgeInsets.only(left: 16, right: 16, top: 12, bottom: 12),
+            color: getItemBGColor(),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Container(
-                    child: Expanded(
-                      child: Text(
-                        item.title + getSelectedItemCount(item),
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
-                        style: getItemTextStyle(),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        child: Expanded(
+                          child: Text(
+                            item.title,
+                            softWrap: true,
+                            overflow: TextOverflow.visible,
+                            textAlign: isFirstLevel ? TextAlign.center : TextAlign.start,
+                            style: getItemTextStyle(),
+                          ),
+                        ),
+                      ),
+                      checkbox
+                    ],
+                  ),
+                  Visibility(
+                    visible: !BrunoTools.isEmpty(item.subTitle),
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(right: item.isInLastLevel() ? 21 : 0),
+                      child: BrnCSS2Text.toTextView(
+                        item.subTitle ?? '',
+                        defaultStyle: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                            decoration: TextDecoration.none,
+                            color: themeData.commonConfig.colorTextSecondary),
+                        // maxLines: 1,
+                        // textOverflow: TextOverflow.ellipsis,
                       ),
                     ),
-                  ),
-                  checkbox
+                  )
                 ],
               ),
-              Visibility(
-                visible: !BrunoTools.isEmpty(item.subTitle),
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(right: item.isInLastLevel() ? 21 : 0),
-                  child: BrnCSS2Text.toTextView(item.subTitle ?? '',
-                      defaultStyle: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.normal,
-                          decoration: TextDecoration.none,
-                          color: themeData.commonConfig.colorTextSecondary),
-                      // maxLines: 1,
-                      // textOverflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+          Visibility(
+              visible: !item.isInLastLevel() && getSelectedCount(item) > 0,
+              child: Container(
+                margin: EdgeInsets.all(8),
+                width: 5,
+                height: 5,
+                decoration: ShapeDecoration(
+                  shape: CircleBorder(),
+                  color: themeData.commonConfig.brandPrimary,
+                ),
+              ))
+        ],
       ),
     );
   }
@@ -166,5 +183,26 @@ class BrnSelectionCommonItemWidget extends StatelessWidget {
       }
     }
     return itemCount;
+  }
+
+  int getSelectedCount(BrnSelectionEntity item) {
+    int count = 0;
+    if(isFirstLevel) {
+      for(var e in item.children) {
+        if(e.children.isNotEmpty) {
+          count += e.children.where((f) => f.isSelected && !f.isUnLimit()).length;
+        } else {
+          count += e.isSelected ? 1 : 0;
+        }
+      }
+    } else {
+      if (
+      // (BrnSelectionUtil.getTotalLevel(item) < 3 ) &&
+      item.children != null) {
+        count = item.children.where((f) => f.isSelected && !f.isUnLimit()).length;
+      }
+    }
+
+    return count;
   }
 }

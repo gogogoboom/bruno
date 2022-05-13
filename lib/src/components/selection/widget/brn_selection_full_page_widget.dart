@@ -2,6 +2,7 @@
 
 import 'dart:math';
 
+import 'package:bruno/bruno.dart';
 import 'package:bruno/src/components/button/brn_big_main_button.dart';
 import 'package:bruno/src/components/selection/bean/brn_selection_common_entity.dart';
 import 'package:bruno/src/components/selection/brn_selection_util.dart';
@@ -123,7 +124,7 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
           backgroundColor: getBgByListIndex(1),
           selectedBackgroundColor: getSelectBgByListIndex(1),
           // maxHeight: widget.maxContentHeight,
-          flex: getFlexByListIndex(1),
+          flex: 1,
           focusedIndex: _firstIndex,
           singleListItemSelect:
               (int listIndex, int index, BrnSelectionEntity entity) {
@@ -134,6 +135,9 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
             }
             widget.onSelectionChange(_firstIndex, _secondIndex, _thirdIndex);
           }));
+      widgets.add(Expanded(child: Container(
+        color: widget.themeData.middleNormalBgColor,
+      ), flex: 3,));
     } else if (!BrunoTools.isEmpty(_firstList) &&
         !BrunoTools.isEmpty(_secondList) &&
         BrunoTools.isEmpty(_thirdList)) {
@@ -143,7 +147,7 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
           themeData: widget.themeData,
           backgroundColor: getBgByListIndex(1),
           selectedBackgroundColor: getSelectBgByListIndex(1),
-          flex: getFlexByListIndex(1),
+          flex: 1,
           focusedIndex: _firstIndex,
           singleListItemSelect:
               (int listIndex, int index, BrnSelectionEntity entity) {
@@ -156,13 +160,17 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
           themeData: widget.themeData,
           backgroundColor: getBgByListIndex(2),
           selectedBackgroundColor: getSelectBgByListIndex(2),
-          flex: getFlexByListIndex(2),
+          flex: 3,
           focusedIndex: _secondIndex,
           singleListItemSelect:
               (int listIndex, int index, BrnSelectionEntity entity) {
             _setSecondIndex(index);
             widget.onSelectionChange(_firstIndex, _secondIndex, _thirdIndex);
           }));
+
+      // widgets.add(Expanded(child: Container(
+      //   color: widget.themeData.middleNormalBgColor,
+      // ), flex: 2,));
     } else if (!BrunoTools.isEmpty(_firstList) &&
         !BrunoTools.isEmpty(_secondList) &&
         !BrunoTools.isEmpty(_thirdList)) {
@@ -172,7 +180,7 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
           themeData: widget.themeData,
           backgroundColor: getBgByListIndex(1),
           selectedBackgroundColor: getSelectBgByListIndex(1),
-          flex: getFlexByListIndex(1),
+          flex: 1,
           focusedIndex: _firstIndex,
           singleListItemSelect:
               (int listIndex, int index, BrnSelectionEntity entity) {
@@ -185,7 +193,7 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
           themeData: widget.themeData,
           backgroundColor: getBgByListIndex(2),
           selectedBackgroundColor: getSelectBgByListIndex(2),
-          flex: getFlexByListIndex(2),
+          flex: 1,
           focusedIndex: _secondIndex,
           singleListItemSelect:
               (int listIndex, int index, BrnSelectionEntity entity) {
@@ -197,8 +205,9 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
           themeData: widget.themeData,
           backgroundColor: getBgByListIndex(3),
           selectedBackgroundColor: getSelectBgByListIndex(3),
-          flex: getFlexByListIndex(3),
+          flex: 2,
           focusedIndex: _thirdIndex,
+          withLine: true,
           singleListItemSelect:
               (int listIndex, int index, BrnSelectionEntity entity) {
             if (entity.isSelected) {
@@ -283,8 +292,15 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
                 onTap: _clearAllSelectedItems,
               ),
               Expanded(
-                child: BrnBigMainButton(
-                  title: '确定',
+                child: BrnBigGhostButton(
+                  themeData: BrnButtonConfig(
+                    bigButtonRadius: 24,
+                    bigButtonFontSize: 14,
+                      bigButtonHeight: 40
+                  ),
+                  titleColor: Colors.white,
+                  bgColor: Color(0xFF0066FF),
+                  title: '提交',
                   onTap: () {
                     _confirmButtonClickEvent();
                   },
@@ -494,15 +510,11 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
       flex = 1;
     } else if (totalLevel == 3) {
       if (listIndex == 1) {
-        flex = 2;
+        flex = 1;
       } else if (listIndex == 2) {
-        if (_thirdList == null) {
-          flex = 7;
-        } else {
-          flex = 2;
-        }
+        flex = 1;
       } else if (listIndex == 3) {
-        flex = 4;
+        flex = 2;
       }
     }
     return flex;
