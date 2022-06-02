@@ -92,7 +92,8 @@ class BrnSelectionCommonItemWidget extends StatelessWidget {
                   ),
                   Visibility(
                     visible: !BrunoTools.isEmpty(item.subTitle),
-                    child: Padding(
+                    child: Container(
+                      alignment: (item.subTitle != null && item.subTitle.contains('分')) ? Alignment.centerRight : Alignment.centerLeft,
                       padding:
                           EdgeInsets.only(right: item.isInLastLevel() ? 21 : 0),
                       child: BrnCSS2Text.toTextView(
