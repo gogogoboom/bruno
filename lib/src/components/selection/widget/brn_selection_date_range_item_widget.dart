@@ -112,6 +112,7 @@ class _BrnSelectionDateRangeItemWidgetState
               children: <Widget>[
                 getDateRangeTextField(false),
                 Container(
+                  margin: EdgeInsets.symmetric(horizontal: 12),
                   child: Text(
                     "至",
                     style: widget.themeData.inputTextStyle?.generateTextStyle(),
@@ -128,38 +129,43 @@ class _BrnSelectionDateRangeItemWidgetState
 
   Widget getDateRangeTextField(bool isMax) {
     return Expanded(
-      child: TextField(
-        enableInteractiveSelection: false,
-        readOnly: true,
-        onTap: () {
-          widget.onTapped();
-          onTextTapped(isMax);
-        },
-        style: widget.themeData.inputTextStyle?.generateTextStyle(),
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-        keyboardType: TextInputType.numberWithOptions(),
-        onChanged: (input) {
-          widget.item.isSelected = true;
-        },
-        controller: isMax
-            ? widget.maxTextEditingController
-            : widget.minTextEditingController,
-        cursorColor: widget.themeData.commonConfig.brandPrimary,
-        textAlign: TextAlign.center,
-        decoration: InputDecoration(
-          hintStyle: widget.themeData.hintTextStyle?.generateTextStyle(),
-          hintText: (!isMax ? '开始日期' : '结束日期'),
-          enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-            width: 1,
-            color: widget.themeData.commonConfig.borderColorBase,
-          )),
-          focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-            width: 1,
-            color: widget.themeData.commonConfig.borderColorBase,
-          )),
-          contentPadding: EdgeInsets.all(0),
+      child: SizedBox(
+        height: 40,
+        child: TextField(
+          enableInteractiveSelection: false,
+          readOnly: true,
+          onTap: () {
+            widget.onTapped();
+            onTextTapped(isMax);
+          },
+          style: widget.themeData.inputTextStyle?.generateTextStyle(),
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          keyboardType: TextInputType.numberWithOptions(),
+          onChanged: (input) {
+            widget.item.isSelected = true;
+          },
+          controller: isMax
+              ? widget.maxTextEditingController
+              : widget.minTextEditingController,
+          cursorColor: widget.themeData.commonConfig.brandPrimary,
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(
+            fillColor: Color(0xffF2F2F2),
+            filled: true,
+            hintStyle: widget.themeData.hintTextStyle?.generateTextStyle(),
+            hintText: (!isMax ? '开始日期' : '结束日期'),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  width: 0,
+                  color: Colors.transparent,
+                )),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  width: 0,
+                  color: Colors.transparent,
+                )),
+            contentPadding: EdgeInsets.all(0),
+          ),
         ),
       ),
     );

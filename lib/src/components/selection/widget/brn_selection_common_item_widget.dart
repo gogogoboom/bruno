@@ -189,7 +189,7 @@ class BrnSelectionCommonItemWidget extends StatelessWidget {
     int count = 0;
     if(isFirstLevel) {
       for(var e in item.children) {
-        if(e.children.isNotEmpty) {
+        if(e.children?.isNotEmpty ?? false) {
           count += e.children.where((f) => f.isSelected && !f.isUnLimit()).length;
         } else {
           count += e.isSelected ? 1 : 0;

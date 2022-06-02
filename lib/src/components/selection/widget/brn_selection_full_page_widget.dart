@@ -23,10 +23,11 @@ class BrnListSelectionFullPageWidget extends StatefulWidget {
   final Function(int, int, int) onSelectionChange;
   final Function() onReset;
   BrnSelectionConfig themeData;
+  final BrnFullSelectionController controller;
 
   BrnListSelectionFullPageWidget(
       {Key key,
-      @required this.entity,
+      @required this.entity, this.controller,
       this.maxContentHeight = DESIGN_SELECTION_HEIGHT,
       this.showSelectedCount = false,
       this.onSelectionConfirm,
@@ -35,10 +36,16 @@ class BrnListSelectionFullPageWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  _BrnSelectionGroupViewState createState() => _BrnSelectionGroupViewState();
+  BrnSelectionGroupViewState createState() => BrnSelectionGroupViewState();
+
 }
 
-class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> {
+class BrnFullSelectionController {
+
+  void reset() {}
+}
+
+class BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> {
   final int maxShowCount = 6;
 
   List<BrnSelectionEntity> _firstList = List();
@@ -267,30 +274,44 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
         ),
         Container(
           color: Colors.white,
-          padding: EdgeInsets.fromLTRB(8, 11, 20, 11),
+          padding: EdgeInsets.fromLTRB(48, 12, 48, 12),
           child: Row(
             children: <Widget>[
-              InkWell(
-                child: Container(
-                  padding: EdgeInsets.only(left: 12, right: 20),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        height: 24,
-                        width: 24,
-                        child: BrunoTools.getAssetImage(
-                            BrnAsset.iconSelectionReset),
-                      ),
-                      Text(
-                        "重置",
-                        style:
-                            widget.themeData.resetTextStyle.generateTextStyle(),
-                      )
-                    ],
-                  ),
-                ),
-                onTap: _clearAllSelectedItems,
-              ),
+              // InkWell(
+              //   child: Container(
+              //     padding: EdgeInsets.only(left: 12, right: 20),
+              //     child: Column(
+              //       children: <Widget>[
+              //         Container(
+              //           height: 24,
+              //           width: 24,
+              //           child: BrunoTools.getAssetImage(
+              //               BrnAsset.iconSelectionReset),
+              //         ),
+              //         Text(
+              //           "重置",
+              //           style:
+              //               widget.themeData.resetTextStyle.generateTextStyle(),
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              //   onTap: _clearAllSelectedItems,
+              // ),
+              // Expanded(
+              //   child: BrnBigGhostButton(
+              //     themeData: BrnButtonConfig(
+              //         bigButtonRadius: 24,
+              //         bigButtonFontSize: 14,
+              //         bigButtonHeight: 40
+              //     ),
+              //     titleColor: Colors.white,
+              //     bgColor: Color(0xFF0066FF),
+              //     title: '重置',
+              //     onTap: _clearAllSelectedItems,
+              //   ),
+              // ),
+              // SizedBox(width: 24,),
               Expanded(
                 child: BrnBigGhostButton(
                   themeData: BrnButtonConfig(
@@ -311,6 +332,10 @@ class _BrnSelectionGroupViewState extends State<BrnListSelectionFullPageWidget> 
         )
       ],
     );
+  }
+
+  void reset() {
+    _clearAllSelectedItems();
   }
 
   //pragma mark -- event responder

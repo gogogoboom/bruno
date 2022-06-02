@@ -2,6 +2,7 @@
 
 import 'dart:ui';
 
+import 'package:bruno/bruno.dart';
 import 'package:bruno/src/components/button/brn_big_main_button.dart';
 import 'package:bruno/src/components/calendar/brn_calendar_view.dart';
 import 'package:bruno/src/components/line/brn_line.dart';
@@ -370,31 +371,60 @@ class _BrnRangeSelectionGroupWidgetState
   Widget _bottomWidget() {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.fromLTRB(8, 11, 20, 11),
+      padding: EdgeInsets.fromLTRB(24, 12, 24, 12),
       child: Row(
         children: <Widget>[
-          InkWell(
-            child: Container(
-              padding: EdgeInsets.only(left: 12, right: 20),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 24,
-                    width: 24,
-                    child:
-                        BrunoTools.getAssetImage(BrnAsset.iconSelectionReset),
-                  ),
-                  Text(
-                    '重置',
-                    style: widget.themeData.resetTextStyle.generateTextStyle(),
-                  )
-                ],
-              ),
-            ),
-            onTap: _clearAllSelectedItems,
-          ),
+          // InkWell(
+          //   child: Container(
+          //     padding: EdgeInsets.only(left: 12, right: 20),
+          //     child: Column(
+          //       children: <Widget>[
+          //         Container(
+          //           height: 24,
+          //           width: 24,
+          //           child:
+          //               BrunoTools.getAssetImage(BrnAsset.iconSelectionReset),
+          //         ),
+          //         Text(
+          //           '重置',
+          //           style: widget.themeData.resetTextStyle.generateTextStyle(),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          //   onTap: _clearAllSelectedItems,
+          // ),
+          // Expanded(
+          //   child: BrnBigMainButton(
+          //     title: '确定',
+          //     onTap: () {
+          //       _confirmButtonClickEvent();
+          //     },
+          //   ),
+          // ),
           Expanded(
-            child: BrnBigMainButton(
+            child: BrnBigGhostButton(
+              themeData: BrnButtonConfig(
+                  bigButtonRadius: 24,
+                  bigButtonFontSize: 14,
+                  bigButtonHeight: 32
+              ),
+              titleColor: Color(0xFF575655),
+              bgColor: Color(0xFFF2F2F2),
+              title: '重置',
+              onTap: _clearAllSelectedItems,
+            ),
+          ),
+          SizedBox(width: 24,),
+          Expanded(
+            child: BrnBigGhostButton(
+              themeData: BrnButtonConfig(
+                  bigButtonRadius: 24,
+                  bigButtonFontSize: 14,
+                  bigButtonHeight: 32
+              ),
+              titleColor: Colors.white,
+              bgColor: Color(0xFF0066FF),
               title: '确定',
               onTap: () {
                 _confirmButtonClickEvent();

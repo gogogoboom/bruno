@@ -55,17 +55,23 @@ class BrnSelectionMenuItemWidget extends StatelessWidget {
                   padding: EdgeInsets.only(left: 4),
                   child: isHighLight
                       ? (active
-                          ? BrunoTools.getAssetImageWithBandColor(
-                              BrnAsset.ICON_ARROWUP_SELECT,
-                              configId: themeData.configId)
-                          : BrunoTools.getAssetImageWithBandColor(
-                              BrnAsset.ICON_ARROWDOWN_SELECT))
+                          ?
+
+
+                      Icon(Icons.arrow_drop_up, color: themeData.commonConfig.brandPrimary,) : Icon(Icons.arrow_drop_down, color: themeData.commonConfig.brandPrimary,))
+                  // BrunoTools.getAssetImageWithBandColor(
+                  //             BrnAsset.ICON_ARROWUP_SELECT,
+                  //             configId: themeData.configId)
+                  //         : BrunoTools.getAssetImageWithBandColor(
+                  //             BrnAsset.ICON_ARROWDOWN_SELECT))
                       : (active
-                          ? BrunoTools.getAssetImageWithBandColor(
-                              BrnAsset.ICON_ARROWUP_SELECT,
-                              configId: themeData.configId)
-                          : BrunoTools.getAssetImage(
-                              BrnAsset.ICON_ARROWDOWN_UNSELECT)))
+                      ? Icon(Icons.arrow_drop_up, color: themeData.menuNormalTextStyle.color,) : Icon(Icons.arrow_drop_down, color: themeData.menuNormalTextStyle.color,))
+                          // ? BrunoTools.getAssetImageWithBandColor(
+                          //     BrnAsset.ICON_ARROWUP_SELECT,
+                          //     configId: themeData.configId)
+                          // : BrunoTools.getAssetImage(
+                          //     BrnAsset.ICON_ARROWDOWN_UNSELECT))
+              )
             ],
           ),
         ),
